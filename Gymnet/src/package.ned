@@ -1,0 +1,3 @@
+package gymnet;
+
+@license(LGPL);

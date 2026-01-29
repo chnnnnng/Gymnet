@@ -1,0 +1,8 @@
+gym==0.26.2
+numpy==2.2.6
+cloudpickle
+gym-notices==0.0.8
+protobuf==3.20.0
+zmq
+pyzmq
+numpy
