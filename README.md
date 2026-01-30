@@ -1,91 +1,112 @@
 # Gymnet
 OMNet++ project with Gymnasium connection.
 
-## Get Ready
+## Getting Started
 
-`git clone` somewhere on your computer, you will have 'somewhere/Gymnet'.
+Clone the repository to your computer:
+```
+git clone <repository_url>
+```
+This will create a folder, e.g., `somewhere/Gymnet`.
 
-## Prepare your OMNet++ environment
+## Preparing the OMNet++ Environment
 
-### Make and install ZMQ (libzmq)
+### Build and Install ZMQ (libzmq)
 
-1. Download zeromq-4.3.5.zip from https://github.com/zeromq/libzmq/releases/tag/v4.3.5
-2. Unzip to Gymnet folder: somewhere/Gymnet/zeromq-4.3.5
-3. Run OMNet++ Shell and cd to somewhere/Gymnet/zeromq-4.3.5
-4. Then, do `./configure`, `make` and `make install`
+1. Download `zeromq-4.3.5.zip` from [ZMQ Releases](https://github.com/zeromq/libzmq/releases/tag/v4.3.5).
+2. Extract it to the Gymnet folder: `somewhere/Gymnet/zeromq-4.3.5`.
+3. Open the OMNet++ Shell and navigate to `somewhere/Gymnet/zeromq-4.3.5`.
+4. Run the following commands:
+   ```
+   ./configure
+   make
+   make install
+   ```
 
-### Make and install Protobuf 3.20.0
+### Build and Install Protobuf 3.20.0
 
-1. Download protobuf-cpp-3.20.0.zip from https://github.com/protocolbuffers/protobuf/releases/tag/v3.20.0
-2. Unzip to Gymnet folder: somewhere/Gymnet/protobuf-3.20.0
-3. Run OMNet++ Shell and cd to somewhere/Gymnet/protobuf-3.20.0
-4. Then, do `./configure CXXFLAGS="-std=c++17"`, `make` and `make install` 
+1. Download `protobuf-cpp-3.20.0.zip` from [Protobuf Releases](https://github.com/protocolbuffers/protobuf/releases/tag/v3.20.0).
+2. Extract it to the Gymnet folder: `somewhere/Gymnet/protobuf-3.20.0`.
+3. Open the OMNet++ Shell and navigate to `somewhere/Gymnet/protobuf-3.20.0`.
+4. Run the following commands:
+   ```
+   ./configure CXXFLAGS="-std=c++17"
+   make
+   make install
+   ```
 
-> libzmq and libprotobuf can be uninstalled by `make uninstall`
+> To uninstall `libzmq` or `libprotobuf`, use `make uninstall`.
 
-### Build OMNet++ Project (linking with libzmq and libprotobuf)
+### Build the OMNet++ Project (Linking with libzmq and libprotobuf)
 
-Use OMNet++ IDE:
+#### Using OMNet++ IDE
 
-1. Right click your project ('Gymnet' for example) and enter 'Properties for Gymnet',
-2. Find 'OMNet++' -> 'Makemake',
-3. Select 'src: makemake', click 'options',
-4. Select 'Link', click 'More>>',
-5. Add two new entries in 'Additional libraries to link with': `zmq` and `protobuf`,
-6. Clock 'Ok' and 'Apply and close', then `build` or `rebuild` your project.
+1. Right-click the project (e.g., `Gymnet`) and select `Properties`.
+2. Navigate to `OMNet++` -> `Makemake`.
+3. Select `src: makemake` and click `Options`.
+4. Under `Link`, click `More>>`.
+5. Add `zmq` and `protobuf` to `Additional libraries to link with`.
+6. Click `OK`, then `Apply and Close`. Finally, build or rebuild the project.
 
-> step 1 ~ 5 are only meant for fisrt time build.
-> If build doesn't work, delete `Makefile` in `src` folder then rebuild again.
+> Steps 1–5 are only required for the first build.  
+> If the build fails, delete the `Makefile` in the `src` folder and rebuild.
 
-Use OMNet++ Shell (**Recommended**):
+#### Using OMNet++ Shell (**Recommended**)
 
-1. Run OMNet++ Shell and cd to somewhere/Gymnet/Gymnet
-2. Do `make cleanall`
-3. Do `make makefiles`
-4. Do `make all`
+1. Open the OMNet++ Shell and navigate to `somewhere/Gymnet/Gymnet`.
+2. Run the following commands:
+   ```
+   make cleanall
+   make makefiles
+   make all
+   ```
 
-> step 2 and 3 are meant for first build, for further build only step 4 is required.
-> if something went wrong in further build, try step 2 and 3 before `make all`.
+> `make makefiles` is only required for the first build. For subsequent builds, only `make all` is needed.  
+> If issues occur during subsequent builds, repeat `cleanall` and `makefiles` before running `make all`.
 
-If build successfully, you may find a excutable file 'Gymnet' or 'Gymnet.exe' in 'somewhere/Gymnet/Gymnet/src'
+If the build succeeds, you will find an executable file (`Gymnet` or `Gymnet.exe`) in `somewhere/Gymnet/Gymnet/src`.
 
-## Prepare your Gym script
+## Preparing the Gym Script
 
-### Install requirements
+### Install Requirements
 
-1. Create a .conda or .venv environment and activate it,
-2. Install requirements by `pip install -r requirements.txt`.
+1. Create and activate a `.conda` or `.venv` environment.
+2. Install the required packages:
+   ```
+   pip install -r requirements.txt
+   ```
 
 ### Link Gym with Gymnet
 
-1. Goto 'pygymnet/config.py', edit config items, including `omnetpp_installation_dir`,`scenario_dir`,`executable`,`config_name`,`time_limit`,
-2. Goto 'pygymnet/action_serializer.py', implement your action serializer.
+1. Open `pygymnet/config.py` and configure the following items:
+   - `omnetpp_installation_dir`
+   - `scenario_dir`
+   - `executable`
+   - `config_name`
+   - `time_limit`
+2. Open `pygymnet/action_serializer.py` and implement your action serializer.
 
-> if you only want to run the demo simulation (project name and executable name is 'Gymnet', config name is 'demo'), simply edit `omnetpp_installation_dir` is ok.
+> For the demo simulation (project name: `Gymnet`, executable name: `Gymnet`, config name: `demo`), you only need to configure `omnetpp_installation_dir`.
 
-### Run python script
+### Run the Python Script
 
-a simple demo `demo.py` is given, you can run it now!
-
-> make sure you are in correct conda/venv environment
-
-> if you encounter with an error "module 'numpy' has no attribute 'bool8'", it's ok, you can just replace all `np.bool8` with `np.bool` in `site-packages\gym\utils\passive_env_checker.py`.
-
-### Let's see the demo code
-
+A simple demo script (`demo.py`) is provided. Run it as follows:
 ```
+python demo.py
+```
+
+> Ensure the correct `.conda` or `.venv` environment is activated.  
+> If you encounter the error `"module 'numpy' has no attribute 'bool8'"`, replace all occurrences of `np.bool8` with `np.bool` in `site-packages/gym/utils/passive_env_checker.py`.
+
+### Demo Code Overview
+
+```python
 import gym
 import pygymnet
-```
-You should import these packages first.
 
-```
 env = gym.make("gymnet-v1")
 env.seed(0)
-```
-These line create a new env using gymnet-v1 and set random seed to 0.
 
-```
 observation = env.reset()
 done = False
 while not done:
@@ -93,23 +114,26 @@ while not done:
     observation, reward, done, truncated, info = env.step(action)
     example_obs = observation['example_obskey']
     if not done: 
-      print(f"Gym choose Action: {action['example_action']}")
-      print(f"Get observation: {example_obs} and reward {reward}")
+        print(f"Gym chose Action: {action['example_action']}")
+        print(f"Received observation: {example_obs} and reward: {reward}")
 ```
-Do 'observation-action-reward' loop, until done (in this case, simulation time reaches `time_limit` in `pygymnet/config.py`).
 
-## For your own job
+This code demonstrates the observation-action-reward loop until `done` is `True` (e.g., when the simulation time reaches `time_limit` in `pygymnet/config.py`).
 
-- Create new OMNet++ project based on `Gymnet` (you can overwrite it or write from a copy).
-    - Specifically, you have to implement your own `ExampleGymProcess`
-    - Build a network with your own GymProcess
-    - Important, you have to edit `omnetpp.ini`, make sure `*.gym_connection.observation_space` and `*.gym_connection.action_space` is correct
-    - Build OMNet++ project
-- Manage your python code
-    - Write your python code based on `demo.py`, if you want to do reinforcement learning, you need to use a agent to make actions based on observations.
-    - Edit `pygymnet/config.py` correspinding to your own OMNet++ project
-    - Implement `pygymnet/action_serializer.py` corresponding to `*.gym_connection.action_space`
+## Customizing for Your Project
 
-## Last but not least
+- **OMNet++ Project**:
+  - Create a new OMNet++ project based on `Gymnet` (overwrite or copy it).
+  - Implement your own `ExampleGymProcess`.
+  - Build a network with your custom GymProcess.
+  - Edit `omnetpp.ini` to ensure `*.gym_connection.observation_space` and `*.gym_connection.action_space` are correctly configured.
+  - Build the OMNet++ project.
 
-May this work help you in your study and research! If you need any help, feel free to contact me.
+- **Python Code**:
+  - Customize your Python code based on `demo.py`. For reinforcement learning, use an agent to make actions based on observations.
+  - Update `pygymnet/config.py` to match your OMNet++ project.
+  - Implement `pygymnet/action_serializer.py` to match `*.gym_connection.action_space`.
+
+## Final Notes
+
+May this project assist you in your studies and research! If you need help, feel free to contact me.
