@@ -17,9 +17,10 @@
 #define __GYMNET_EXAMPLEGYMPROCESS_H_
 
 #include <omnetpp.h>
-#include "../GymConnection/GymConnection.h"
 
 using namespace omnetpp;
+
+class GymConnection;
 
 /**
  * TODO - Generated class

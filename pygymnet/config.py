@@ -1,7 +1,10 @@
 ########################## User Configuration ##########################
 
 # where is your omnet++ installation directory
-omnetpp_installation_dir = r"C:\Users\chng\Warehouse\omnetpp-6.1"
+omnetpp_installation_dir = r"C:\Users\chng\Warehouse\omnetpp-5.6.2"
+
+# where is your gymnet-addition directory
+gymnet_addition_dir = r"C:\Users\chng\Projects\Gymnet\Gymnet-addition"
 
 # where is the omnetpp.ini file located
 scenario_dir = "Gymnet/simulations"
@@ -40,10 +43,11 @@ gymnet_config = {
     },
     # Environment path for Windows users (required for OMNet++ to run properly)
     "env_path": (
-        f"{omnetpp_installation_dir}\\tools\\win32.x86_64\\opt\\mingw64\\bin;"
-        f"{omnetpp_installation_dir}\\tools\\win32.x86_64\\mingw64\\bin;"
+        f"{gymnet_addition_dir}\\bin;"
+        f"{omnetpp_installation_dir}\\tools\\win64\\mingw64\\bin;"
         f"{omnetpp_installation_dir}\\bin;"
-        if platform.system() == "Windows" else None
+        if platform.system() == "Windows" else
+        f"{gymnet_addition_dir}\\bin;"
     ),
 }
 

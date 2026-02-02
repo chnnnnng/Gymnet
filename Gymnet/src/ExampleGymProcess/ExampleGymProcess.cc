@@ -1,4 +1,5 @@
 #include "ExampleGymProcess.h"
+#include "../GymConnection/GymConnection.h"
 
 Define_Module(ExampleGymProcess);
 

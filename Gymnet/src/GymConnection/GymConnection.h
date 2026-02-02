@@ -26,7 +26,6 @@
 #include "zmq.hpp"
 #include "veinsgym.pb.h"
 
-
 class GymConnection : public omnetpp::cSimpleModule {
 public:
     void initialize() override;

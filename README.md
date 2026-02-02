@@ -41,14 +41,15 @@ This will create a folder, e.g., `somewhere/Gymnet`.
 
 #### Using OMNet++ IDE
 
-1. Right-click the project (e.g., `Gymnet`) and select `Properties`.
-2. Navigate to `OMNet++` -> `Makemake`.
-3. Select `src: makemake` and click `Options`.
-4. Under `Link`, click `More>>`.
-5. Add `zmq` and `protobuf` to `Additional libraries to link with`.
-6. Click `OK`, then `Apply and Close`. Finally, build or rebuild the project.
+1. Open `somewhere/Gymnet` as your OMNet++ workspace.
+2. Import `somewhere/Gymnet/Gymnet` as a project.
+3. Right-click the project (e.g., `Gymnet`) and select `Properties`.
+4. Navigate to `OMNet++` -> `Makemake`.
+5. Select `src: makemake` and click `Options`.
+6. Under `Link`, click `More>>`.
+7. Add `zmq` and `protobuf` to `Additional libraries to link with`.
+8. Click `OK`, then `Apply and Close`. Finally, build or rebuild the project.
 
-> Steps 1–5 are only required for the first build.  
 > If the build fails, delete the `Makefile` in the `src` folder and rebuild.
 
 #### Using OMNet++ Shell (**Recommended**)
@@ -134,6 +135,49 @@ This code demonstrates the observation-action-reward loop until `done` is `True`
   - Update `pygymnet/config.py` to match your OMNet++ project.
   - Implement `pygymnet/action_serializer.py` to match `*.gym_connection.action_space`.
 
+## Simulate Gymnet-NR
+
+We provide a basic OMNet + LTE/NR + Gym workflow, you have to meet these requirements:
+- OMNet++ Version 5.6.2 https://omnetpp.org/download/old
+- Gymnet
+- Gymnet-inet4: This is a minimal version for INET 4.2.2 (you can use original INET instead)
+- Gymnet-lte: This is a modified version for SimuLTE 1.2.0 (do not use original SimuLTE)
+
+### Build Gymnet-inet4
+
+- Navigate to gymnet-inet4 folder in OMNet++ Shell
+
+```
+source setenv
+make cleanall
+make makefiles
+make all
+```
+
+If build successfully, you will find `libINET` file in `gymnet-inet4/src`.
+
+### Build Gymnet-lte
+
+- Navigate to gymnet-inet4 (or original INET 4.2.2) folder in OMNet++ Shell
+
+```
+source setenv
+```
+
+- Navigate to gymnet-lte folder in OMNet++ Shell
+
+```
+make cleanall
+make makefiles
+make all
+```
+
+If build successfully, you will find `libGYMNETLTE` file in `gymnet-lte/src`.
+
 ## Final Notes
 
 May this project assist you in your studies and research! If you need help, feel free to contact me.
+
+
+
+
