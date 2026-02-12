@@ -159,5 +159,4 @@ These libraries are required to enable LTE/NR features in your OMNeT++ project. 
 
 ## Final Notes
 
-We hope this project supports your studies and research! For assistance, feel free to reach out.
-```
+We hope this project supports your studies and research! For assistance, feel free to contect me.
